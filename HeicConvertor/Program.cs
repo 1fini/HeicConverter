@@ -17,8 +17,9 @@ namespace HeicConverter
                 using (ImageMagick.MagickImage image = new ImageMagick.MagickImage(file))
                 {
                     // I:\tmp\IMG_0935.heic
-                    var output = file.Replace(".heic", ".jpg");
-                    image.Write(output);
+                    var partial_output = file.Replace(".heic", ".jpg");
+                    var fileName = partial_output.Split(new char[] { '\\' }).LastOrDefault();
+                    if (!string.IsNullOrEmpty(fileName)) { image.Write(string.Concat(args[1], @"\", fileName)); }
                 }
             }
             Console.ReadLine();
